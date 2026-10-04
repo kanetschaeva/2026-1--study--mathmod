@@ -1,0 +1,377 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+  aspectratio=169,
+  russian,
+]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolshorizontal
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+
+\usetheme[]{metropolis}
+\usefonttheme{serif} % use mainfont rather than sansfont for slide text
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{DejaVu Sans}
+  \setsansfont[]{DejaVu Sans}
+  \setmonofont[]{DejaVu Sans Mono}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+
+
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifPDFTeX
+\else
+\babelfont{rm}[]{DejaVu Sans}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+\usepackage[]{csquotes}
+
+%%% Load theme
+\IfFileExists{beamerthemegotham.sty}{
+  %%%% Full TeXlive
+  \usetheme{gotham}
+  \gothamset{
+    numbering=totalframenumber,
+    parttocframe default=off,
+    sectiontocframe default=off,
+    subsectiontocframe default=off,
+    tocframe template=gotham bullet,
+    % progressbar position=frametitle,
+    progressbar position=foot,
+  }
+  \renewcommand{\gothamInstituteLogoSquare}[1][4ex]{%
+    \includegraphics[height=##1]{_resources/image/logo_rudn-inverted.png}
+  }
+  % \renewcommand{\gothamtitlepagelogo}[1][4ex]{%
+  %   \includegraphics[height=##1]{_resources/image/logo_rudn.png}
+  % }
+}{%
+  %%%% TinyTeX
+  \usepackage{libertine}
+  %%%% https://deic.uab.cat/~iblanes/beamer_gallery/
+  \usetheme{Madrid}
+}
+\metroset{progressbar=frametitle,numbering=fraction}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Лабораторная работа №3},
+  pdfauthor={Нечаева Кира Андреевна},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{\texorpdfstring{Лабораторная работа №3}{Лабораторная работа №3}}
+\subtitle{\texorpdfstring{Модели боевых
+действий}{Модели боевых действий}}
+\author{Нечаева Кира Андреевна}
+\date{}
+\institute{НКНбд-01-23}
+
+\begin{document}
+\frame{\titlepage}
+
+
+\begin{frame}{Постановка задачи}
+\protect\phantomsection\label{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438}
+\textbf{Вариант 2}
+
+Начальные численности:
+
+\[
+x(0)=25000,
+\qquad
+y(0)=13000.
+\]
+
+Рассматриваются два случая:
+
+\begin{itemize}
+\tightlist
+\item
+  боевые действия между регулярными войсками;
+\item
+  регулярные войска и партизанские отряды.
+\end{itemize}
+
+Цель --- построить зависимости \(x(t)\) и \(y(t)\) и определить
+результат противостояния.
+\end{frame}
+
+\begin{frame}{Модель 1. Регулярные войска}
+\protect\phantomsection\label{ux43cux43eux434ux435ux43bux44c-1.-ux440ux435ux433ux443ux43bux44fux440ux43dux44bux435-ux432ux43eux439ux441ux43aux430}
+\[
+\frac{dx}{dt}
+=
+-0.41x-0.83y+\sin(t+3),
+\]
+
+\[
+\frac{dy}{dt}
+=
+-0.29x-0.63y+\cos(t+3).
+\]
+
+Система является линейной относительно численностей \(x\) и \(y\).
+
+Моделирование прекращается, когда численность одной из сторон достигает
+нуля.
+\end{frame}
+
+\begin{frame}{Результат первой модели}
+\protect\phantomsection\label{ux440ux435ux437ux443ux43bux44cux442ux430ux442-ux43fux435ux440ux432ux43eux439-ux43cux43eux434ux435ux43bux438}
+\includegraphics[width=0.78\linewidth,height=\textheight,keepaspectratio]{image/regular_forces.png}
+
+Армия \(Y\) первой достигает нулевой численности.
+
+\textbf{Победитель: армия X.}
+\end{frame}
+
+\begin{frame}{Модель 2. Регулярные войска и партизаны}
+\protect\phantomsection\label{ux43cux43eux434ux435ux43bux44c-2.-ux440ux435ux433ux443ux43bux44fux440ux43dux44bux435-ux432ux43eux439ux441ux43aux430-ux438-ux43fux430ux440ux442ux438ux437ux430ux43dux44b}
+\[
+\frac{dx}{dt}
+=
+-0.33x-0.88y+\sin(t),
+\]
+
+\[
+\frac{dy}{dt}
+=
+-0.44xy-0.77y+\cos(3t).
+\]
+
+Главное отличие:
+
+\[
+\boxed{-0.44xy}
+\]
+
+Потери зависят одновременно от численности обеих сторон.
+\end{frame}
+
+\begin{frame}{Результат второй модели}
+\protect\phantomsection\label{ux440ux435ux437ux443ux43bux44cux442ux430ux442-ux432ux442ux43eux440ux43eux439-ux43cux43eux434ux435ux43bux438}
+\includegraphics[width=0.78\linewidth,height=\textheight,keepaspectratio]{image/mixed_forces.png}
+
+Динамика развивается значительно быстрее, чем в первой модели.
+
+Армия \(Y\) снова первой достигает нулевой численности.
+
+\textbf{Победитель: армия X.}
+\end{frame}
+
+\begin{frame}{Сравнение моделей}
+\protect\phantomsection\label{ux441ux440ux430ux432ux43dux435ux43dux438ux435-ux43cux43eux434ux435ux43bux435ux439}
+\includegraphics[width=0.9\linewidth,height=\textheight,keepaspectratio]{image/both_models.png}
+
+В обеих моделях:
+
+\begin{itemize}
+\tightlist
+\item
+  начальные условия одинаковы;
+\item
+  победителем является армия \(X\).
+\end{itemize}
+
+При этом характер изменения численностей различается из-за структуры
+уравнений.
+\end{frame}
+
+\begin{frame}{Основное различие}
+\protect\phantomsection\label{ux43eux441ux43dux43eux432ux43dux43eux435-ux440ux430ux437ux43bux438ux447ux438ux435}
+\textbf{Модель 1}
+
+Потери задаются линейными членами:
+
+\[
+x,\qquad y.
+\]
+
+\textbf{Модель 2}
+
+Появляется нелинейное взаимодействие:
+
+\[
+xy.
+\]
+
+Поэтому скорость изменения численности может сильно зависеть от текущего
+состояния обеих сторон.
+\end{frame}
+
+\begin{frame}{Итог}
+\protect\phantomsection\label{ux438ux442ux43eux433}
+Для варианта 2 были реализованы две системы дифференциальных уравнений.
+
+Для каждой модели:
+
+\begin{itemize}
+\tightlist
+\item
+  выполнено численное решение;
+\item
+  построены графики \(x(t)\) и \(y(t)\);
+\item
+  определена проигравшая сторона.
+\end{itemize}
+
+В обоих случаях первой нулевой численности достигает армия \(Y\).
+
+\textbf{Победитель --- армия X.}
+\end{frame}
+
+
+
+
+\end{document}
