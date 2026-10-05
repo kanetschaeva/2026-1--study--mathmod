@@ -1,0 +1,366 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+  aspectratio=169,
+  russian,
+]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolshorizontal
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+
+\usetheme[]{metropolis}
+\usefonttheme{serif} % use mainfont rather than sansfont for slide text
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{DejaVu Sans}
+  \setsansfont[]{DejaVu Sans}
+  \setmonofont[]{DejaVu Sans Mono}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+
+
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifPDFTeX
+\else
+\babelfont{rm}[]{DejaVu Sans}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+\usepackage[]{csquotes}
+
+%%% Load theme
+\IfFileExists{beamerthemegotham.sty}{
+  %%%% Full TeXlive
+  \usetheme{gotham}
+  \gothamset{
+    numbering=totalframenumber,
+    parttocframe default=off,
+    sectiontocframe default=off,
+    subsectiontocframe default=off,
+    tocframe template=gotham bullet,
+    % progressbar position=frametitle,
+    progressbar position=foot,
+  }
+  \renewcommand{\gothamInstituteLogoSquare}[1][4ex]{%
+    \includegraphics[height=##1]{_resources/image/logo_rudn-inverted.png}
+  }
+  % \renewcommand{\gothamtitlepagelogo}[1][4ex]{%
+  %   \includegraphics[height=##1]{_resources/image/logo_rudn.png}
+  % }
+}{%
+  %%%% TinyTeX
+  \usepackage{libertine}
+  %%%% https://deic.uab.cat/~iblanes/beamer_gallery/
+  \usetheme{Madrid}
+}
+\metroset{progressbar=frametitle,numbering=fraction}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Лабораторная работа №5},
+  pdfauthor={Нечаева Кира Андреевна},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{\texorpdfstring{Лабораторная работа №5}{Лабораторная работа №5}}
+\subtitle{\texorpdfstring{Модель
+«хищник-жертва»}{Модель «хищник-жертва»}}
+\author{Нечаева Кира Андреевна}
+\date{}
+\institute{НКНбд-01-23}
+
+\begin{document}
+\frame{\titlepage}
+
+
+\begin{frame}{Постановка задачи}
+\protect\phantomsection\label{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438}
+\textbf{Вариант 2}
+
+Модель описывает взаимодействие двух популяций:
+
+\begin{itemize}
+\tightlist
+\item
+  \(x(t)\) --- хищники;
+\item
+  \(y(t)\) --- жертвы.
+\end{itemize}
+
+Начальные условия:
+
+\[
+x(0)=7,
+\qquad
+y(0)=12.
+\]
+
+Необходимо построить временные зависимости, фазовый портрет и найти
+стационарное состояние.
+\end{frame}
+
+\begin{frame}{Модель Лотки--Вольтерры}
+\protect\phantomsection\label{ux43cux43eux434ux435ux43bux44c-ux43bux43eux442ux43aux438ux432ux43eux43bux44cux442ux435ux440ux440ux44b}
+\[
+\frac{dx}{dt}
+=
+-0.13x+0.042xy,
+\]
+
+\[
+\frac{dy}{dt}
+=
+0.33y-0.03xy.
+\]
+
+Члены \(xy\) связывают динамику двух популяций.
+
+Изменение одной популяции влияет на дальнейшее изменение другой.
+\end{frame}
+
+\begin{frame}{Стационарное состояние}
+\protect\phantomsection\label{ux441ux442ux430ux446ux438ux43eux43dux430ux440ux43dux43eux435-ux441ux43eux441ux442ux43eux44fux43dux438ux435}
+Стационарное состояние соответствует
+
+\[
+\frac{dx}{dt}=0,
+\qquad
+\frac{dy}{dt}=0.
+\]
+
+Для варианта 2:
+
+\[
+\boxed{x^*=11}
+\]
+
+\[
+\boxed{y^*\approx3.0952}
+\]
+
+В этой точке численности обеих популяций остаются постоянными.
+\end{frame}
+
+\begin{frame}{Хищники во времени}
+\protect\phantomsection\label{ux445ux438ux449ux43dux438ux43aux438-ux432ux43e-ux432ux440ux435ux43cux435ux43dux438}
+\includegraphics[width=0.82\linewidth,height=\textheight,keepaspectratio]{image/predators_time.png}
+
+Численность хищников периодически увеличивается и уменьшается.
+\end{frame}
+
+\begin{frame}{Жертвы во времени}
+\protect\phantomsection\label{ux436ux435ux440ux442ux432ux44b-ux432ux43e-ux432ux440ux435ux43cux435ux43dux438}
+\includegraphics[width=0.82\linewidth,height=\textheight,keepaspectratio]{image/prey_time.png}
+
+Численность жертв также изменяется периодически.
+
+Колебания двух популяций связаны между собой.
+\end{frame}
+
+\begin{frame}{Фазовый портрет}
+\protect\phantomsection\label{ux444ux430ux437ux43eux432ux44bux439-ux43fux43eux440ux442ux440ux435ux442}
+\includegraphics[width=0.82\linewidth,height=\textheight,keepaspectratio]{image/phase_portrait.png}
+
+Точкой отмечено стационарное состояние.
+
+Траектория проходит вокруг положения равновесия.
+\end{frame}
+
+\begin{frame}{Почему возникают колебания}
+\protect\phantomsection\label{ux43fux43eux447ux435ux43cux443-ux432ux43eux437ux43dux438ux43aux430ux44eux442-ux43aux43eux43bux435ux431ux430ux43dux438ux44f}
+При большом количестве жертв хищникам достаточно пищи, поэтому их
+численность увеличивается.
+
+Рост числа хищников усиливает сокращение популяции жертв.
+
+После уменьшения количества жертв хищникам становится недостаточно пищи,
+и их численность тоже начинает уменьшаться.
+
+После этого популяция жертв снова восстанавливается.
+\end{frame}
+
+\begin{frame}{Общий результат}
+\protect\phantomsection\label{ux43eux431ux449ux438ux439-ux440ux435ux437ux443ux43bux44cux442ux430ux442}
+\includegraphics[width=0.92\linewidth,height=\textheight,keepaspectratio]{image/all_results.png}
+
+Модель показывает взаимосвязанные периодические колебания двух
+популяций.
+
+Начальное состояние определяет конкретную фазовую траекторию.
+\end{frame}
+
+\begin{frame}{Итог}
+\protect\phantomsection\label{ux438ux442ux43eux433}
+Для варианта 2:
+
+\begin{itemize}
+\tightlist
+\item
+  реализована модель Лотки--Вольтерры;
+\item
+  выполнено численное решение;
+\item
+  построены \(x(t)\) и \(y(t)\);
+\item
+  построен фазовый портрет;
+\item
+  найдено стационарное состояние.
+\end{itemize}
+
+\[
+\boxed{(x^*,y^*)\approx(11;\;3.0952)}
+\]
+\end{frame}
+
+
+
+
+\end{document}
