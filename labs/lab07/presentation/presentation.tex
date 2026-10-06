@@ -1,0 +1,424 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  10pt,
+  ignorenonframetext,
+  aspectratio=169,
+  russian,
+]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolshorizontal
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+
+\usetheme[]{metropolis}
+\usefonttheme{serif} % use mainfont rather than sansfont for slide text
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{DejaVu Sans}
+  \setsansfont[]{DejaVu Sans}
+  \setmonofont[]{DejaVu Sans Mono}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+
+
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifPDFTeX
+\else
+\babelfont{rm}[]{DejaVu Sans}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+\usepackage[]{csquotes}
+
+%%% Load theme
+\IfFileExists{beamerthemegotham.sty}{
+  %%%% Full TeXlive
+  \usetheme{gotham}
+  \gothamset{
+    numbering=totalframenumber,
+    parttocframe default=off,
+    sectiontocframe default=off,
+    subsectiontocframe default=off,
+    tocframe template=gotham bullet,
+    % progressbar position=frametitle,
+    progressbar position=foot,
+  }
+  \renewcommand{\gothamInstituteLogoSquare}[1][4ex]{%
+    \includegraphics[height=##1]{_resources/image/logo_rudn-inverted.png}
+  }
+  % \renewcommand{\gothamtitlepagelogo}[1][4ex]{%
+  %   \includegraphics[height=##1]{_resources/image/logo_rudn.png}
+  % }
+}{%
+  %%%% TinyTeX
+  \usepackage{libertine}
+  %%%% https://deic.uab.cat/~iblanes/beamer_gallery/
+  \usetheme{Madrid}
+}
+\metroset{progressbar=frametitle,numbering=fraction}
+\setbeamersize{text margin left=8mm,text margin right=8mm}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Лабораторная работа №7},
+  pdfauthor={Нечаева Кира Андреевна},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{\texorpdfstring{Лабораторная работа №7}{Лабораторная работа №7}}
+\subtitle{\texorpdfstring{Эффективность рекламы}{Эффективность рекламы}}
+\author{Нечаева Кира Андреевна}
+\date{}
+\institute{НКНбд-01-23}
+
+\begin{document}
+\frame{\titlepage}
+
+
+\begin{frame}{Постановка задачи}
+\protect\phantomsection\label{ux43fux43eux441ux442ux430ux43dux43eux432ux43aux430-ux437ux430ux434ux430ux447ux438}
+\textbf{Вариант 2}
+
+\[
+N=1000,
+\qquad
+n(0)=2.
+\]
+
+\(n(t)\) --- число потенциальных покупателей, уже знающих о товаре.
+
+Необходимо:
+
+\begin{itemize}
+\tightlist
+\item
+  исследовать три модели распространения рекламы;
+\item
+  построить графики \(n(t)\);
+\item
+  для второго случая найти момент максимальной скорости распространения.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Модель рекламы}
+\protect\phantomsection\label{ux43cux43eux434ux435ux43bux44c-ux440ux435ux43aux43bux430ux43cux44b}
+Общий принцип:
+
+\[
+\frac{dn}{dt}
+=
+\left(\alpha_1(t)+\alpha_2(t)n\right)(N-n).
+\]
+
+\textbf{\(\alpha_1\)} --- влияние рекламной кампании.
+
+\textbf{\(\alpha_2n\)} --- распространение информации между
+покупателями.
+
+\textbf{\(N-n\)} --- ещё не информированная часть аудитории.
+\end{frame}
+
+\begin{frame}{Случай 1}
+\protect\phantomsection\label{ux441ux43bux443ux447ux430ux439-1}
+\begin{columns}[c]
+\begin{column}{0.38\linewidth}
+\[
+\frac{dn}{dt}
+=
+(0.65+0.0002n)(N-n).
+\]
+
+По мере распространения рекламы
+
+\[
+n(t)\rightarrow N.
+\]
+
+Рост замедляется при насыщении аудитории.
+\end{column}
+
+\begin{column}{0.62\linewidth}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{image/case1.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Случай 2}
+\protect\phantomsection\label{ux441ux43bux443ux447ux430ux439-2}
+\begin{columns}[c]
+\begin{column}{0.38\linewidth}
+\[
+\frac{dn}{dt}
+=
+(0.0003+0.9n)(N-n).
+\]
+
+Вклад распространения информации между покупателями здесь значительно
+сильнее.
+
+Поэтому аудитория информируется очень быстро.
+\end{column}
+
+\begin{column}{0.62\linewidth}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{image/case2.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Максимальная скорость}
+\protect\phantomsection\label{ux43cux430ux43aux441ux438ux43cux430ux43bux44cux43dux430ux44f-ux441ux43aux43eux440ux43eux441ux442ux44c}
+\begin{columns}[c]
+\begin{column}{0.38\linewidth}
+Для второго случая вычисляется
+
+\[
+\frac{dn}{dt}
+\]
+
+на плотной временной сетке.
+
+Программа определяет:
+
+\begin{itemize}
+\tightlist
+\item
+  максимальную скорость;
+\item
+  момент её достижения;
+\item
+  число информированных клиентов в этот момент.
+\end{itemize}
+\end{column}
+
+\begin{column}{0.62\linewidth}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{image/case2_speed.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Почему скорость имеет максимум}
+\protect\phantomsection\label{ux43fux43eux447ux435ux43cux443-ux441ux43aux43eux440ux43eux441ux442ux44c-ux438ux43cux435ux435ux442-ux43cux430ux43aux441ux438ux43cux443ux43c}
+В начале информированных покупателей мало, поэтому распространение
+информации ещё ограничено.
+
+Затем число информированных растёт, и усиливается передача информации
+между людьми.
+
+После определённого момента остаётся всё меньше неинформированных
+покупателей:
+
+\[
+N-n(t)\rightarrow0.
+\]
+
+Поэтому скорость распространения снова уменьшается.
+\end{frame}
+
+\begin{frame}{Случай 3}
+\protect\phantomsection\label{ux441ux43bux443ux447ux430ux439-3}
+\begin{columns}[c]
+\begin{column}{0.42\linewidth}
+Коэффициенты зависят от времени:
+
+\[
+\alpha_1(t)=0.1\sin(2t),
+\]
+
+\[
+\alpha_2(t)=0.2\cos(3t).
+\]
+
+Поэтому интенсивность распространения рекламы меняется во времени.
+\end{column}
+
+\begin{column}{0.58\linewidth}
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{image/case3.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Сравнение моделей}
+\protect\phantomsection\label{ux441ux440ux430ux432ux43dux435ux43dux438ux435-ux43cux43eux434ux435ux43bux435ux439}
+\includegraphics[width=0.76\linewidth,height=\textheight,keepaspectratio]{image/all_cases.png}
+
+Все три модели имеют одну общую структуру, но различаются
+коэффициентами.
+
+Это приводит к разной скорости и характеру распространения информации.
+\end{frame}
+
+\begin{frame}{Итог}
+\protect\phantomsection\label{ux438ux442ux43eux433}
+Для варианта 2 исследованы три модели рекламной кампании.
+
+Для каждой модели:
+
+\begin{itemize}
+\tightlist
+\item
+  выполнено численное решение;
+\item
+  построена зависимость \(n(t)\);
+\item
+  исследовано насыщение аудитории.
+\end{itemize}
+
+Для второго случая дополнительно найден момент максимальной скорости
+распространения.
+
+\textbf{Эффективность рекламы зависит от прямого рекламного воздействия,
+передачи информации между покупателями и оставшейся неинформированной
+аудитории.}
+\end{frame}
+
+
+
+
+\end{document}
