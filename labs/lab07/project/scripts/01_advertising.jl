@@ -237,6 +237,7 @@ p2 = plot(
     label = "n(t)",
     lw = 3,
     grid = true,
+    xlim = (0, 0.03),
     ylim = (0, N * 1.05)
 )
 
@@ -412,6 +413,7 @@ p3 = plot(
     label = "n(t)",
     lw = 3,
     grid = true,
+    xlim = (0, 0.2),
     ylim = (0, N * 1.05)
 )
 
